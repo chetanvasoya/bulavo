@@ -21,59 +21,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* .vvv {
-  margin-bottom: 20px;
-
-} */
-
-/* .dashboard-btn {
-  width: 22%;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-} */
-
-/* .dashboard-btn:hover {
-  background-color: #0056b3;
-} */
-
-/* select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-} */
-
-/* button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #0056b3;
-} */
-
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-} */
-
-/* table th, table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-} */
-
-/* table th {
-  background-color: #f2f2f2;
-  text-align: left;
-} */
 .fet{
   background-color:#007bff;
   color: white;
@@ -188,7 +135,6 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 10px; */
 }
 
 .month-select {
@@ -212,18 +158,17 @@ button:hover {
   background-color: #0056b3;
 }
 .dashboard1 {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  max-width: 100%; /* Ensure it takes up 100% width of its container */
+  overflow-x: auto; 
+  max-width: 100%;
 }
 
 table {
-  width: 100%; /* Table should take up 100% of its container */
-  min-width: 1200px; /* Set a minimum width to prevent collapsing */
-  /* Adjust other table styles as needed */
+  width: 100%; 
+  min-width: 1200px;
 }
 
 table th, table td {
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap; 
   padding: 8px;
   border: 1px solid #ddd;
 }
