@@ -638,88 +638,19 @@ const Careerdetails = () => {
                           <span className="list-txt">Massage us on our Whasapp number</span>
                         </li>
 
-                        <li>
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                          <span className="list-txt">Sociosqu scelerisque adipisci.</span>
-                        </li>
-                        <li>
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                          <span className="list-txt">Purus eveniet incidi dunt.</span>
-                        </li>
-                        <li>
-                          <i aria-hidden="true" className="fas fa-minus"></i>
-                          <span className="list-txt">Animi atque ornare iaculis.</span>
-                        </li>
+                       
                       </ul>
                     </div>
-                    <div className="widget-bg faq-widget">
-                      <h6 className="bg-title">Frequently Asked Questions</h6>
-                      <div id="sidebar-tab-content" className="accordion-content" role="tablist">
-
-                        <div id="accordion-B" className="card tab-pane" role="tabpanel" aria-labelledby="tab-B">
-                          <div className="card-header" role="tab" id="qus-B">
-                            <h5 className="mb-0">
-                              <a
-                                className={activePanel === 'panel1' ? '' : 'collapsed'}
-                                onClick={() => togglePanel('panel1')}
-                                aria-expanded={activePanel === 'panel1'}
-                                aria-controls="collapse-two"
-                                style={{ cursor: 'pointer' }}
-                              >
-                                Rules for become a partner
-                              </a>
-                            </h5>
-                          </div>
-                          <div
-                            id="collapse-two"
-                            className={`collapse ${activePanel === 'panel1' ? 'show' : ''}`}
-                            data-bs-parent="#sidebar-tab-content"
-                            role="tabpanel"
-                            aria-labelledby="qus-B"
-                          >
-                            <div className="card-body">
-                              Fill the required fields in form
-                            </div>
-                          </div>
-                        </div>
-
-                        <div id="accordion-C" className="card tab-pane" role="tabpanel" aria-labelledby="tab-C">
-                          <div className="card-header" role="tab" id="qus-C">
-                            <h5 className="mb-0">
-                              <a
-                                className={activePanel === 'panel2' ? '' : 'collapsed'}
-                                onClick={() => togglePanel('panel2')}
-                                aria-expanded={activePanel === 'panel2'}
-                                aria-controls="collapse-three"
-                                style={{ cursor: 'pointer' }}
-                              >
-                                Where to Interview?
-                              </a>
-                            </h5>
-                          </div>
-                          <div
-                            id="collapse-three"
-                            className={`collapse ${activePanel === 'panel2' ? 'show' : ''}`}
-                            data-bs-parent="#sidebar-tab-content"
-                            role="tabpanel"
-                            aria-labelledby="qus-C"
-                          >
-                            <div className="card-body">
-                              GF-001 Mayuransh elanza, Shyamal cross road, nr. Parekh hospital, Satellite, Ahmedabad
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            
                     <div className="widget-bg upload-widget text-center">
                       <div className="widget-icon">
                         <i className="fas fa-file-invoice"></i>
                       </div>
                       <h5>Send Us Your C.V.</h5>
-                      <p>Do you want to work with us? Please, send your CV to <a
-                        href="https://demo.bosathemes.com/cdn-cgi/l/email-protection#e98d8684888087d8dbdaa98e84888085c78a8684"><span
-                          className="__cf_email__"
-                          data-cfemail="ff9b90929e9691cecdccbf98929e9693d19c9092">bulavoservices@gmail.com</span></a>
+                      <p>Do you want to work with us? Please, send your CV on {"\t"} 
+                      <a href="mailto:bulavoservices@gmail.com" className="__cf_email__">
+      bulavoservices@gmail.com
+    </a>
                       </p>
                       <span className="or-style">OR</span>
                       <Link to="/contact" className="button-round-secondary">CONTACT US</Link>
@@ -757,10 +688,9 @@ const Careerdetails = () => {
                       <span className="contact-title">
                         Email us :
                       </span>
-                      <a
-                        href="https://demo.bosathemes.com/cdn-cgi/l/email-protection#234a4d454c63474c4e424a4d0d404c4e"><span
-                          className="__cf_email__"
-                          data-cfemail="a2cbccc4cde2c6cdcfcbc3cc8cc1cdcf">bulavoservices@gmail.com</span></a>
+                      <a href="mailto:bulavoservices@gmail.com" className="__cf_email__">
+      bulavoservices@gmail.com
+    </a>
                     </aside>
                   </div>
                 </div>

@@ -8,23 +8,27 @@ body {
   padding: 0;
   background-color: #f0f0f0;
 }
-.igg{
+
+.igg {
   height: 100px;
   width: 100px;
 }
 
 .App {
-  max-width:auto;
+  max-width: auto;
   margin: 20px auto;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.fet{
-  background-color:#007bff;
+.fet {
+  background-color: #007bff;
   color: white;
+  width: 200px;
+  height: 50px;
 }
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -33,7 +37,7 @@ body {
 }
 
 .pagination button {
-  background-color:#007bff;
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -114,8 +118,9 @@ body {
     margin: 5px 0;
   }
 }
+
 .header {
-  padding: 20px;
+  /* padding: 20px; */
   background-color: #f5f5f5;
 }
 
@@ -138,8 +143,7 @@ body {
 }
 
 .month-select {
-  width: 200px;
- 
+  width: 400px;
   margin-right: 10px;
 }
 
@@ -157,18 +161,20 @@ body {
 .dashboard-btn:hover {
   background-color: #0056b3;
 }
+
 .dashboard1 {
-  overflow-x: auto; 
+  overflow-x: auto;
   max-width: 100%;
 }
 
 table {
-  width: 100%; 
+  width: 100%;
   min-width: 1200px;
 }
 
-table th, table td {
-  white-space: nowrap; 
+table th,
+table td {
+  white-space: nowrap;
   padding: 8px;
   border: 1px solid #ddd;
 }
@@ -176,13 +182,20 @@ table th, table td {
 .table-container {
   overflow-x: auto;
 }
-.tr th{
+
+.tr th {
   color: white;
 }
-.pb{
+
+.pb {
   width: 120px !important;
 
 }
+
+.dash {
+  padding: 5px !important;
+}
+
 .delete-popup {
   position: fixed;
   top: 50%;
@@ -216,12 +229,19 @@ table th, table td {
 .delete-popup button:first-of-type {
   background-color: #d9534f;
   color: white;
+  margin-left: 20px;
 }
 
 .delete-popup button:last-of-type {
   background-color: #5bc0de;
   color: white;
 }
+
+.delete-popup button {
+  margin-left: 30px;
+}
+
+
 
 @media (max-width: 480px) {
   .delete-popup {
@@ -234,4 +254,29 @@ table th, table td {
     padding: 8px;
     font-size: 14px;
   }
+}
+
+@media (max-width: 480px) {
+  .head {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 680px) {
+  .month-select {
+    width: 200px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .month-select {
+    width: 100px;
+    margin-right: 5px;
+  }
+
+  .fet {
+    height: 40px;
+  }
+
 }

@@ -670,10 +670,9 @@ const Service = () => {
                       <span className="contact-title">
                         Email us :
                       </span>
-                      <a
-                        href="https://demo.bosathemes.com/cdn-cgi/l/email-protection#234a4d454c63474c4e424a4d0d404c4e"><span
-                          className="__cf_email__"
-                          data-cfemail="a2cbccc4cde2c6cdcfcbc3cc8cc1cdcf">bulavoservices@gmail.com</span></a>
+                      <a href="mailto:bulavoservices@gmail.com" className="__cf_email__">
+      bulavoservices@gmail.com
+    </a>
                     </aside>
                   </div>
                 </div>

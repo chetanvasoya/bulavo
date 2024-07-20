@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, query, where, orderBy, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { CiLogout } from "react-icons/ci";
+import { useHistory, useNavigate } from 'react-router-dom';
 
 import './Dashbord.css';
 const db = getFirestore();
@@ -227,35 +229,54 @@ const App = () => {
     fetchAppointments();
     fetchImages();
   }, []);
+  const navigate = useNavigate(); // or useNavigate for React Router v6
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userToken');
+    navigate("/login") // or navigate('/login') for React Router v6
+  };
+
 
   return (
-    
+
     <div className="App">
-       {confirmDelete && (
+      {confirmDelete && (
         <div className="delete-popup">
           <p>Are you sure you want to delete this appointment?</p>
-          <button onClick={confirmDeleteAppointment}>Yes</button>
-          <button onClick={cancelDeleteAppointment}>No</button>
+          <div className="flex justify-center">
+            <button onClick={confirmDeleteAppointment}>Yes</button>
+            <button onClick={cancelDeleteAppointment}>No</button>
+          </div>
         </div>
       )}
-      <div style={{ textAlign: 'center' }}>
-        <h3>Bulavo Admin Panel</h3>
+      <div className='dash' style={{ textAlign: 'center'}}>
+        {/* <h3>Bulavo Admin Panel</h3> */}
+        <div className=" flex items-center justify-around md:justify-around p-1">
+          <h3 className=" head text-center mt-0 md:mt-[10px] sm:text[10px]">Bulavo Admin Panel</h3>
+          <CiLogout className="text-2xl mb-5 md:mt-2 cursor-pointer" onClick={handleLogout} />
+        </div>
+        
+        <div className='button-group'>
+            <button className="dashboard-btn" onClick={() => setDashboard(1)}>Appointments</button>
+            <button className="dashboard-btn" onClick={() => setDashboard(2)}>Experts</button>
+            {/* <button className="dashboard-btn" onClick={() => window.history.back()}>Logout</button> */}
+          </div>
+
         {showImageConfirm && (
-       <div className="delete-popup">
-          <p>Are you sure you want to delete this image?</p>
-          <button onClick={confirmImageDelete}>Yes</button>
-          <button onClick={() => setShowImageConfirm(false)}>No</button>
-        </div>
-      )}
+          <div className="delete-popup">
+            <p>Are you sure you want to delete this image?</p>
+            <div className="flex justify-center">
+              <button onClick={confirmImageDelete} className='mx-3'>Yes</button>
+              <button onClick={() => setShowImageConfirm(false)}>No</button>
+            </div>
+          </div>
+        )}
       </div>
 
       <header className='header'>
         <div className='header-content'>
-          <div className='button-group'>
-            <button className="dashboard-btn" onClick={() => setDashboard(1)}>Appointments</button>
-            <button className="dashboard-btn" onClick={() => setDashboard(2)}>Experts</button>
-            <button className="dashboard-btn" onClick={() => window.history.back()}>Logout</button>
-          </div>
+          
           <br />
           <div className='select-export'>
             <select className='month-select' onChange={(e) => setSelectedMonth(e.target.value)}>
@@ -273,151 +294,154 @@ const App = () => {
               <option value="12">December</option>
             </select>
             <button className="dashboard-btn" onClick={exportData}>Export data</button>
+            
           </div>
         </div>
+        
+        
       </header>
 
       {dashboard === 1 && (
         <div className="dashboard1">
-           <div style={{ marginBottom: '10px', display: "flex", justifyContent: "center" }}>
-              <select style={{marginTop:'6px'}} className='month-select' onChange={(e) => setFilter(e.target.value)} >
-                <option value="all">All Appointments</option>
-                <option value="pending">Pending Appointments</option>
-                <option value="completed">Completed Appointments</option>
-              </select>
-              <button className='fet' onClick={fetchAppointments} style={{ width: "200px", height: "40px" }}>Filter</button>
-            </div>
-  <div className="table-container">
-    <table>
-      <thead>
-        <tr className='tr'>
-          <th>Sr. No.</th>
-          <th>Complete</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Email</th>
-          <th>Service Type</th>
-          <th>Address</th>
-          <th>Date</th>
-          <th>Pending</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {appointments.slice((currentPageAppointments - 1) * pageSize, currentPageAppointments * pageSize).map((appointment, index) => (
-          <tr key={appointment.id}>
-            <td>{appointment.index}</td>
-            <td>
-              <input
-                type="checkbox"
-                checked={appointment.isCompleted}
-                onChange={(e) => handleCheckboxClick(appointment.id, e.target.checked, 'isCompleted')}
-              />
-            </td>
-            <td>{appointment.name}</td>
-            <td>{appointment.contact}</td>
-            <td>{appointment.email}</td>
-            <td>{appointment.category}</td>
-            <td>{appointment.address}</td>
-            <td>{new Date(appointment.submissionTime.seconds * 1000 + appointment.submissionTime.nanoseconds / 1000000).toLocaleString()}</td>
-            <td>
-              <input
-                type="checkbox"
-                checked={appointment.isPending}
-                onChange={(e) => handleCheckboxClick(appointment.id, e.target.checked, 'isPending')}
-              />
-            </td>
-            <td>
-              <button onClick={() => deleteAppointmentRow(appointment.id)}>Delete</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  <div className="pagination">
-  <button className='pb' style={{width:'10%'}}
-    onClick={() => setCurrentPageAppointments(prev => Math.max(prev - 1, 1))}
-    disabled={currentPageAppointments === 1}
-  >
-    Previous
-  </button>
-  <button className='pb' style={{width:'10%'}}
-    onClick={() => setCurrentPageAppointments(prev => Math.min(prev + 1, totalPages))}
-    disabled={currentPageAppointments === totalPages || appointments.length <= pageSize}
-  >
-    Next
-  </button>
-</div>
+          <div style={{ marginBottom: '10px', display: "flex", justifyContent: "center" }}>
+            <select style={{ marginTop: '6px' }} className='month-select' onChange={(e) => setFilter(e.target.value)} >
+              <option value="all">All Appointments</option>
+              <option value="pending">Pending Appointments</option>
+              <option value="completed">Completed Appointments</option>
+            </select>
+            <button className='fet' onClick={fetchAppointments}>Filter</button>
+          </div>
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr className='tr'>
+                  <th>Sr. No.</th>
+                  <th>Complete</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Email</th>
+                  <th>Service Type</th>
+                  <th>Address</th>
+                  <th>Date</th>
+                  <th>Pending</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointments.slice((currentPageAppointments - 1) * pageSize, currentPageAppointments * pageSize).map((appointment, index) => (
+                  <tr key={appointment.id}>
+                    <td>{appointment.index}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={appointment.isCompleted}
+                        onChange={(e) => handleCheckboxClick(appointment.id, e.target.checked, 'isCompleted')}
+                      />
+                    </td>
+                    <td>{appointment.name}</td>
+                    <td>{appointment.contact}</td>
+                    <td>{appointment.email}</td>
+                    <td>{appointment.category}</td>
+                    <td>{appointment.address}</td>
+                    <td>{new Date(appointment.submissionTime.seconds * 1000 + appointment.submissionTime.nanoseconds / 1000000).toLocaleString()}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={appointment.isPending}
+                        onChange={(e) => handleCheckboxClick(appointment.id, e.target.checked, 'isPending')}
+                      />
+                    </td>
+                    <td>
+                      <button onClick={() => deleteAppointmentRow(appointment.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="pagination">
+            <button className='pb' style={{ width: '10%' }}
+              onClick={() => setCurrentPageAppointments(prev => Math.max(prev - 1, 1))}
+              disabled={currentPageAppointments === 1}
+            >
+              Previous
+            </button>
+            <button className='pb' style={{ width: '10%' }}
+              onClick={() => setCurrentPageAppointments(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPageAppointments === totalPages || appointments.length <= pageSize}
+            >
+              Next
+            </button>
+          </div>
 
 
 
 
 
-</div>
+        </div>
       )}
 
       {dashboard === 2 && (
         <div className="dashboard2">
           <div className="table-container">
-          <table>
-            <thead>
-              <tr className='tr'>
-                <th>Sr. No.</th>
-                <th>Name</th>
-                <th>Contect No.</th>
-                <th>Email</th>
-                <th>Adhar card</th>
-                <th>photo</th>
-                <th>Date</th>
-                <th>Area</th>
-                <th>Contected</th>
-                <th>Delete</th>
+            <table>
+              <thead>
+                <tr className='tr'>
+                  <th>Sr. No.</th>
+                  <th>Name</th>
+                  <th>Contect No.</th>
+                  <th>Email</th>
+                  <th>Adhar card</th>
+                  <th>photo</th>
+                  <th>Date</th>
+                  <th>Area</th>
+                  <th>Contected</th>
+                  <th>Delete</th>
 
 
-              </tr>
-            </thead>
-            <tbody >
-              {images.slice((currentPageImages - 1) * pageSize, currentPageImages * pageSize).map((image, index) => (
-                <tr key={image.id}>
-                  <td>{image.index}</td>
-                  <td>{image.name}</td>
-                  <td>{image.contact}</td>
-                  <td>{image.email}</td>
-                  <td>
-                    <img className='igg'
-                      src={image.aadharUrl}
-                      alt="Image"
-                      onClick={() => openModal(image.aadharUrl)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                  </td>
-                  <td>
-                    <img className='igg'
-                      src={image.photoUrl}
-                      alt="Image"
-                      onClick={() => openModal(image.photoUrl)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                  </td>
-                  <td>{new Date(image.submissionTime.seconds * 1000 + image.submissionTime.nanoseconds / 1000000).toLocaleString()}</td>
-                  <td>{image.area}</td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      data-doc-id={image.id}
-                      checked={image.isQuery}
-                      onChange={(e) => handleImageCheckbox(image.id, e.target.checked)}
-                    />
-                  </td>
-
-                  <td>
-                    <button onClick={() => deleteImagesRow(image.id)}>Delete</button>
-                  </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody >
+                {images.slice((currentPageImages - 1) * pageSize, currentPageImages * pageSize).map((image, index) => (
+                  <tr key={image.id}>
+                    <td>{image.index}</td>
+                    <td>{image.name}</td>
+                    <td>{image.contact}</td>
+                    <td>{image.email}</td>
+                    <td>
+                      <img className='igg'
+                        src={image.aadharUrl}
+                        alt="Image"
+                        onClick={() => openModal(image.aadharUrl)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </td>
+                    <td>
+                      <img className='igg'
+                        src={image.photoUrl}
+                        alt="Image"
+                        onClick={() => openModal(image.photoUrl)}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </td>
+                    <td>{new Date(image.submissionTime.seconds * 1000 + image.submissionTime.nanoseconds / 1000000).toLocaleString()}</td>
+                    <td>{image.area}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        data-doc-id={image.id}
+                        checked={image.isQuery}
+                        onChange={(e) => handleImageCheckbox(image.id, e.target.checked)}
+                      />
+                    </td>
+
+                    <td>
+                      <button onClick={() => deleteImagesRow(image.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className="pagination">
             <button className='pb' style={{ width: '10%' }}

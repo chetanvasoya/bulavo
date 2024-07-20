@@ -147,9 +147,7 @@ const Complain = () => {
                     <input type="text" id="address" name="address" placeholder="Address" required value={formData.address} onChange={handleChange} />
                     {errors.address && <p className="error">{errors.address}</p>}<br />
                     <button id="submitButton" type="submit" className="button">Submit</button>
-                    <button className="whatsapp-button button">
-                        <i style={{ color: "#FFFFFF" }} className="fab fa-whatsapp"></i>
-                    </button>
+                  
                 </form>
             </div>
         </>
