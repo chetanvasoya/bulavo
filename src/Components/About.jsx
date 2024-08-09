@@ -378,10 +378,7 @@ const About = () => {
                                                 "Discover why we excel in home appliances! Find out what makes us the best."                                 </h3>
                                             <p className="section-paragraph">
                                                 "Discover excellence in electronics with us! As a leading provider, we pride ourselves on unmatched expertise, cutting-edge solutions, and a commitment to delivering the best in electronic services. Choose us for innovation, reliability, and a personalized approach to meet all your electronic needs."                                    </p>
-                                            <p className="section-paragraph">
-                                                Eius ut reprehenderit aut facilisis? Natus quaerat eget, sapien libero alias facilisis, habitasse culpa conubia tellus aspernatur totam, imperdiet debitis? Nec eius, impedit feugiat odio.
-                                            </p>
-
+                                           
                                         </div>
                                     </div>
                                     <div className="col-md-6">
